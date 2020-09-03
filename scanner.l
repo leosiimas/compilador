@@ -15,16 +15,15 @@ line_break [ \t\n\r\f\v]
 exponent [eE][+-]?{integer}
 real {integer}("."{integer})?{exponent}?
 
-
 identifier {alphabetic}+{alphanumeric}*
 identifier_error {digit}+[{alphabetic}]+
 
 char \'({alphanumeric}|{especial_caracter})\'
 char_error (''|\'({alphanumeric}|{especial_caracter})+\')
 
-double_quotes \"[{alphanumeric}{especial_caracter}]+\"
+double_quotes \"({alphanumeric}|{especial_caracter})+\"
 
-lines_comment \/\*.*{line_break}*\*\/
+lines_comment \/\*(.*|{line_break}*)\*\/
 line_comment \/\/.*
 
 sl \<\<
