@@ -15,16 +15,14 @@ line_break [ \t\n\r\f\v]
 exponent [eE][+-]?{integer}
 real {integer}("."{integer})?{exponent}?
 
-char_error ''
 
 identifier {alphabetic}+{alphanumeric}*
 identifier_error {digit}+[{alphabetic}]+
 
-char \'{alphanumeric}\'
+char \'({alphanumeric}|{especial_caracter})\'
+char_error (''|\'({alphanumeric}|{especial_caracter})+\')
 
-double_quotes \"[{alphanumeric}]+\"
-simple_quotes '{alphanumeric}+'
-
+double_quotes \"[{alphanumeric}{especial_caracter}]+\"
 
 lines_comment \/\*.*{line_break}*\*\/
 line_comment \/\/.*
@@ -78,7 +76,6 @@ default { return TK_PR_DEFAULT; }
 {real} { return TK_LIT_FLOAT; }
 false { return TK_LIT_FALSE; }
 true  { return TK_LIT_TRUE; }
-{simple_quotes} {return TK_LIT_STRING;}
 {char} { return TK_LIT_CHAR;}
 {double_quotes} {return TK_LIT_STRING;}
 
